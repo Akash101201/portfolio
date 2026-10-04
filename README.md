@@ -20,6 +20,8 @@ All text, links, projects, experience, and skills live in `src/data/resume.ts`.
 
 ## Deploy
 
-```bash
-npx vercel --prod
-```
+Repo: [github.com/Akash101201/portfolio](https://github.com/Akash101201/portfolio)
+
+1. Sign in at [vercel.com](https://vercel.com) with GitHub as **Akash101201** (Hobby plan is free).
+2. Import this repo: [vercel.com/new](https://vercel.com/new) → select `portfolio`.
+3. Leave the Next.js defaults and click Deploy. Later `git push`es redeploy automatically.
