@@ -43,7 +43,7 @@ function Avatar() {
           fill
           priority
           sizes="(min-width: 1024px) 256px, 192px"
-          className="relative rounded-full object-cover ring-4 ring-white dark:ring-zinc-900"
+          className="relative rounded-full object-cover object-[50%_22%] ring-4 ring-white dark:ring-zinc-900"
         />
       ) : (
         <div

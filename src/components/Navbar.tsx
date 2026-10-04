@@ -1,9 +1,32 @@
 "use client";
 
 import { Download, Menu, X } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { navLinks, profile } from "@/data/resume";
 import { ThemeToggle } from "./ThemeToggle";
+
+function BrandMark() {
+  if (profile.avatar) {
+    return (
+      <span className="relative size-8 overflow-hidden rounded-full ring-1 ring-zinc-200 dark:ring-zinc-700">
+        <Image
+          src={profile.avatar}
+          alt=""
+          fill
+          sizes="32px"
+          className="object-cover object-[50%_22%]"
+        />
+      </span>
+    );
+  }
+
+  return (
+    <span className="grid size-8 place-items-center rounded-lg bg-linear-to-br from-indigo-500 to-violet-600 text-xs font-bold text-white">
+      {profile.initials}
+    </span>
+  );
+}
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -22,9 +45,7 @@ export function Navbar() {
           href="#top"
           className="flex items-center gap-2 rounded-md font-semibold tracking-tight text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-indigo-500 dark:text-zinc-50"
         >
-          <span className="grid size-8 place-items-center rounded-lg bg-linear-to-br from-indigo-500 to-violet-600 text-xs font-bold text-white">
-            {profile.initials}
-          </span>
+          <BrandMark />
           <span>{profile.name}</span>
         </a>
 

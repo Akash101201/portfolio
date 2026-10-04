@@ -10,8 +10,7 @@ export const profile = {
   github: "https://github.com/Akash101201",
   linkedin: "https://www.linkedin.com/in/akash-shankar-450290212",
   resume: "/Akash_Shankar_Resume.pdf",
-  // Set to "/avatar.jpg" after adding a photo to public/ to replace the initials avatar.
-  avatar: null as string | null,
+  avatar: "/avatar.jpg",
   siteUrl: "https://akash-shankar.vercel.app",
   openToWork: true,
   heroTitle: "Full-Stack & AI Engineer",
