@@ -14,11 +14,11 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: 14,
-          background: "linear-gradient(135deg, #6366f1, #7c3aed)",
+          borderRadius: "45% 55% 50% 50%",
+          background: "linear-gradient(145deg, #4a9b86, #2a6b58)",
           color: "white",
-          fontSize: 30,
-          fontWeight: 700,
+          fontSize: 28,
+          fontWeight: 600,
           letterSpacing: -1,
         }}
       >

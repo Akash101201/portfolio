@@ -1,36 +1,55 @@
 import { Award, Briefcase, GraduationCap } from "lucide-react";
 import { certifications, education, experience } from "@/data/resume";
+import { FluidBackdrop } from "./FluidBackdrop";
 import { Reveal } from "./Reveal";
 import { RichText } from "./RichText";
 import { SectionHeading } from "./SectionHeading";
 
 export function Experience() {
   return (
-    <section id="experience" aria-labelledby="experience-heading" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+    <section
+      id="experience"
+      aria-labelledby="experience-heading"
+      className="section-flow relative mx-auto max-w-6xl overflow-hidden px-4 py-20 sm:px-6 lg:py-28"
+    >
+      <FluidBackdrop variant="section" />
+
       <Reveal>
         <SectionHeading id="experience-heading" eyebrow="Experience" title="Where I've made an impact" />
       </Reveal>
 
-      <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr]">
-        <ol className="relative space-y-10 border-l-2 border-zinc-200 pl-6 sm:pl-8 dark:border-zinc-800">
+      <div className="relative grid gap-12 lg:grid-cols-[1.55fr_1fr]">
+        <ol className="relative space-y-12 pl-2 sm:pl-4">
+          <div
+            aria-hidden="true"
+            className="absolute bottom-4 left-[11px] top-3 w-px sm:left-[19px]"
+            style={{
+              background:
+                "linear-gradient(180deg, var(--color-tide), var(--color-bloom), var(--color-sea))",
+              opacity: 0.55,
+            }}
+          />
           {experience.map((job) => (
-            <li key={job.role} className="relative">
+            <li key={job.role} className="relative pl-8 sm:pl-10">
               <span
                 aria-hidden="true"
-                className={`absolute -left-[33px] top-1 grid size-4 place-items-center rounded-full ring-4 ring-white sm:-left-[41px] dark:ring-zinc-950 ${
-                  job.current ? "bg-indigo-600 dark:bg-indigo-400" : "bg-zinc-300 dark:bg-zinc-600"
+                className={`absolute left-0 top-1.5 size-5 sm:left-2 ${
+                  job.current
+                    ? "bg-[var(--accent)] tide-pulse"
+                    : "bg-[color-mix(in_oklab,var(--color-tide)_55%,var(--surface))]"
                 }`}
+                style={{ borderRadius: "45% 55% 50% 50%" }}
               />
               <Reveal>
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                  <h3 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+                  <h3 className="font-display text-xl font-medium tracking-tight text-[var(--text)]">
                     {job.role}
-                    <span className="font-medium text-indigo-600 dark:text-indigo-400"> · {job.company}</span>
+                    <span className="text-[var(--accent)]"> · {job.company}</span>
                   </h3>
-                  <p className="shrink-0 text-sm font-medium text-zinc-500 dark:text-zinc-400">
+                  <p className="shrink-0 text-sm font-medium text-[var(--text-muted)]">
                     {job.period}
                     {job.current && (
-                      <span className="ml-2 rounded-full bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+                      <span className="chip-organic ml-2 bg-[color-mix(in_oklab,var(--color-tide)_25%,var(--surface))] px-2 py-0.5 text-xs font-semibold text-[var(--accent)]">
                         Current
                       </span>
                     )}
@@ -38,8 +57,12 @@ export function Experience() {
                 </div>
                 <ul className="mt-4 space-y-3">
                   {job.bullets.map((b) => (
-                    <li key={b.slice(0, 32)} className="flex gap-3 leading-relaxed text-zinc-600 dark:text-zinc-400">
-                      <span aria-hidden="true" className="mt-2.5 size-1.5 shrink-0 rounded-full bg-indigo-500" />
+                    <li key={b.slice(0, 32)} className="flex gap-3 leading-relaxed text-[var(--text-muted)]">
+                      <span
+                        aria-hidden="true"
+                        className="mt-2.5 size-1.5 shrink-0 bg-[var(--accent-warm)]"
+                        style={{ borderRadius: "40%" }}
+                      />
                       <span>
                         <RichText text={b} />
                       </span>
@@ -51,32 +74,32 @@ export function Experience() {
           ))}
         </ol>
 
-        <div className="space-y-6">
+        <div className="space-y-5">
           <Reveal>
-            <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900/50">
-              <h3 className="flex items-center gap-2 font-semibold text-zinc-900 dark:text-zinc-50">
-                <GraduationCap className="size-5 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
+            <div className="surface-pebble p-6" style={{ borderRadius: "2rem 1.5rem 2.25rem 1.75rem" }}>
+              <h3 className="flex items-center gap-2 font-display text-lg font-medium text-[var(--text)]">
+                <GraduationCap className="size-5 text-[var(--accent)]" aria-hidden="true" />
                 Education
               </h3>
               {education.map((e) => (
                 <div key={e.degree} className="mt-4">
-                  <p className="font-medium text-zinc-900 dark:text-zinc-100">{e.degree}</p>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                  <p className="font-medium text-[var(--text)]">{e.degree}</p>
+                  <p className="text-sm text-[var(--text-muted)]">
                     {e.school} · {e.period}
                   </p>
-                  <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">{e.detail}</p>
+                  <p className="mt-2 text-sm text-[var(--text-muted)]">{e.detail}</p>
                 </div>
               ))}
             </div>
           </Reveal>
 
           <Reveal delay={80}>
-            <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900/50">
-              <h3 className="flex items-center gap-2 font-semibold text-zinc-900 dark:text-zinc-50">
-                <Award className="size-5 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
+            <div className="surface-pebble p-6" style={{ borderRadius: "1.5rem 2.25rem 1.75rem 2rem" }}>
+              <h3 className="flex items-center gap-2 font-display text-lg font-medium text-[var(--text)]">
+                <Award className="size-5 text-[var(--accent)]" aria-hidden="true" />
                 Certifications
               </h3>
-              <ul className="mt-4 space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+              <ul className="mt-4 space-y-2 text-sm text-[var(--text-muted)]">
                 {certifications.map((c) => (
                   <li key={c}>{c}</li>
                 ))}
@@ -85,14 +108,21 @@ export function Experience() {
           </Reveal>
 
           <Reveal delay={160}>
-            <div className="rounded-2xl border border-indigo-200 bg-indigo-50 p-6 dark:border-indigo-900 dark:bg-indigo-950/40">
-              <h3 className="flex items-center gap-2 font-semibold text-zinc-900 dark:text-zinc-50">
-                <Briefcase className="size-5 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
+            <div
+              className="border border-[var(--border-soft)] p-6"
+              style={{
+                borderRadius: "2.25rem 1.5rem 2.5rem 1.75rem",
+                background:
+                  "linear-gradient(145deg, color-mix(in oklab, var(--color-tide) 28%, var(--surface)), color-mix(in oklab, var(--color-bloom) 18%, var(--surface)))",
+              }}
+            >
+              <h3 className="flex items-center gap-2 font-display text-lg font-medium text-[var(--text)]">
+                <Briefcase className="size-5 text-[var(--accent-warm)]" aria-hidden="true" />
                 Career highlight
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-                Promoted from intern to full-time Software Engineer within 6 months on the strength of measurable full-stack
-                delivery.
+              <p className="mt-3 text-sm leading-relaxed text-[var(--text-muted)]">
+                Promoted from intern to full-time Software Engineer within 6 months on the strength of measurable
+                full-stack delivery.
               </p>
             </div>
           </Reveal>

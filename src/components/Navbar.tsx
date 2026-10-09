@@ -9,20 +9,20 @@ import { ThemeToggle } from "./ThemeToggle";
 function BrandMark() {
   if (profile.avatar) {
     return (
-      <span className="relative size-8 overflow-hidden rounded-full ring-1 ring-zinc-200 dark:ring-zinc-700">
-        <Image
-          src={profile.avatar}
-          alt=""
-          fill
-          sizes="32px"
-          className="object-cover object-[50%_22%]"
-        />
+      <span
+        className="relative size-8 overflow-hidden ring-1 ring-[var(--border-soft)]"
+        style={{ borderRadius: "45% 55% 50% 50%" }}
+      >
+        <Image src={profile.avatar} alt="" fill sizes="32px" className="object-cover object-[50%_22%]" />
       </span>
     );
   }
 
   return (
-    <span className="grid size-8 place-items-center rounded-lg bg-linear-to-br from-indigo-500 to-violet-600 text-xs font-bold text-white">
+    <span
+      className="grid size-8 place-items-center bg-[linear-gradient(145deg,var(--color-sea),var(--color-moss))] text-xs font-bold text-white"
+      style={{ borderRadius: "45% 55% 50% 50%" }}
+    >
       {profile.initials}
     </span>
   );
@@ -39,22 +39,24 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200/70 bg-white/80 backdrop-blur-md dark:border-zinc-800/70 dark:bg-zinc-950/80">
+    <header className="glass sticky top-0 z-50 border-b border-[var(--border-soft)]">
       <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <a
           href="#top"
-          className="flex items-center gap-2 rounded-md font-semibold tracking-tight text-zinc-900 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-indigo-500 dark:text-zinc-50"
+          className="focus-organic flex items-center gap-2.5 font-display text-lg font-medium tracking-tight text-[var(--text)]"
+          style={{ borderRadius: "0.75rem" }}
         >
           <BrandMark />
           <span>{profile.name}</span>
         </a>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-0.5 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 focus-visible:outline-2 focus-visible:outline-indigo-500 dark:text-zinc-400 dark:hover:text-zinc-50"
+              className="focus-organic px-3 py-2 text-sm font-medium text-[var(--text-muted)] transition-colors duration-300 hover:text-[var(--accent)]"
+              style={{ borderRadius: "0.85rem 1.1rem" }}
             >
               {link.label}
             </a>
@@ -63,7 +65,7 @@ export function Navbar() {
           <a
             href={profile.resume}
             download
-            className="ml-2 inline-flex items-center gap-2 rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-indigo-400"
+            className="btn-organic focus-organic ml-2 inline-flex items-center gap-2 bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white"
           >
             <Download className="size-4" aria-hidden="true" />
             Resume
@@ -78,7 +80,8 @@ export function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="inline-flex size-11 items-center justify-center rounded-full text-zinc-700 transition-colors hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-indigo-500 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            className="focus-organic inline-flex size-11 items-center justify-center text-[var(--text-muted)] transition-colors hover:bg-[color-mix(in_oklab,var(--color-tide)_18%,transparent)] hover:text-[var(--text)]"
+            style={{ borderRadius: "40%" }}
           >
             {open ? <X className="size-5" aria-hidden="true" /> : <Menu className="size-5" aria-hidden="true" />}
           </button>
@@ -88,7 +91,7 @@ export function Navbar() {
       {open && (
         <div
           id="mobile-menu"
-          className="border-t border-zinc-200 bg-white px-4 pb-6 pt-2 md:hidden dark:border-zinc-800 dark:bg-zinc-950"
+          className="border-t border-[var(--border-soft)] bg-[var(--surface)] px-4 pb-6 pt-2 md:hidden"
         >
           <ul className="flex flex-col">
             {navLinks.map((link) => (
@@ -96,7 +99,7 @@ export function Navbar() {
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-md px-2 py-3 text-base font-medium text-zinc-700 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
+                  className="block px-2 py-3 text-base font-medium text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]"
                 >
                   {link.label}
                 </a>
@@ -107,7 +110,7 @@ export function Navbar() {
             href={profile.resume}
             download
             onClick={() => setOpen(false)}
-            className="mt-3 flex items-center justify-center gap-2 rounded-full bg-zinc-900 px-4 py-3 text-sm font-medium text-white dark:bg-zinc-50 dark:text-zinc-900"
+            className="btn-organic mt-3 flex items-center justify-center gap-2 bg-[var(--accent)] px-4 py-3 text-sm font-medium text-white"
           >
             <Download className="size-4" aria-hidden="true" />
             Download Resume

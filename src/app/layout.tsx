@@ -1,13 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Figtree, Fraunces } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { OrganicAtmosphere } from "@/components/OrganicAtmosphere";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { profile } from "@/data/resume";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const figtree = Figtree({
+  variable: "--font-figtree",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
   display: "swap",
 });
@@ -21,13 +28,15 @@ export const metadata: Metadata = {
   keywords: [
     "Akash Shankar",
     "Full-Stack Engineer",
+    "AI Engineer",
     "Software Engineer",
     "React",
     "Angular",
-    "Next.js",
     "TypeScript",
     "Node.js",
     "GraphQL",
+    "LangChain",
+    "RAG",
     "Bengaluru",
     "Portfolio",
   ],
@@ -51,27 +60,33 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+    { media: "(prefers-color-scheme: light)", color: "#f5faf8" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d1a17" },
   ],
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} antialiased`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${figtree.variable} ${fraunces.variable} antialiased`}
+      suppressHydrationWarning
+    >
       <head>
         <noscript>
-          <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
+          <style>{`.reveal{opacity:1!important;transform:none!important;filter:none!important}`}</style>
         </noscript>
       </head>
-      <body className="flex min-h-screen flex-col bg-white font-sans text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+      <body className="flex min-h-screen flex-col font-sans text-[var(--text)]">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <a
             href="#main"
-            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-indigo-600 focus:px-4 focus:py-2 focus:text-white"
+            className="focus-organic sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-[var(--accent)] focus:px-4 focus:py-2 focus:text-white"
+            style={{ borderRadius: "1.25rem 1.75rem" }}
           >
             Skip to content
           </a>
+          <OrganicAtmosphere />
           <Navbar />
           <main id="main" className="flex-1">
             {children}

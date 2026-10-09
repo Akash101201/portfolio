@@ -4,7 +4,7 @@
 export const profile = {
   name: "Akash Shankar",
   initials: "AS",
-  role: "Full-Stack Engineer",
+  role: "Full-Stack & AI Engineer",
   location: "Bengaluru, India",
   email: "s.akash101201@gmail.com",
   github: "https://github.com/Akash101201",
@@ -16,13 +16,13 @@ export const profile = {
   heroTitle: "Full-Stack & AI Engineer",
   headline: "From pixel-perfect UIs to scalable APIs to LLM-powered tools, I build the whole stack.",
   tagline:
-    "Software Engineer at Zebra Technologies shipping React, Angular, Node.js, and GraphQL across **4+ B2B products**, plus AI tools with LangChain and RAG that automated **60% of routine customer queries** and save developers **6 hours a week**.",
+    "Software Engineer at Zebra Technologies, shipping React, Angular, Node.js, and GraphQL products alongside internal LLM tools built with LangChain and RAG.",
   capabilities: {
     fullStack: ["React", "Angular", "Node.js", "GraphQL", "MongoDB / SQL"],
     ai: ["LLMs", "LangChain", "RAG", "Agents"],
   },
   seoDescription:
-    "Akash Shankar is a Full-Stack Engineer in Bengaluru building responsive React and Angular front-ends, Node.js, REST, and GraphQL services, and LLM-powered developer tools.",
+    "Akash Shankar is a Full-Stack & AI Engineer in Bengaluru building React and Angular front-ends, Node.js and GraphQL services, and LLM tools with LangChain and RAG.",
 };
 
 export const metrics = [
@@ -78,19 +78,19 @@ export const ai = {
       context: "LLM-powered chatbots and web apps (React + Node.js)",
     },
     {
-      value: "35%",
-      label: "faster UI builds",
-      context: "Figma-to-Code tool generating React and Angular UIs",
-    },
-    {
-      value: "6 hrs",
-      label: "of developer time saved every week",
-      context: "LLM tools for UI generation and defect auto-diagnosis",
-    },
-    {
       value: "30%",
       label: "faster development",
       context: "AI-generated unit tests and refactoring suggestions",
+    },
+    {
+      value: "In editor",
+      label: "defect diagnosis from JIRA",
+      context: "LangChain agents inside a VS Code extension",
+    },
+    {
+      value: "Figma",
+      label: "to production UI",
+      context: "React and Angular generation — measured result is in the case study",
     },
   ],
   stack: ["LLMs", "LangChain", "LlamaIndex", "RAG", "Agentic workflows", "Prompt Engineering"],
@@ -112,10 +112,10 @@ export const projects: Project[] = [
     featured: true,
     badge: "internal",
     star: {
-      s: "Turning Figma designs into React and Angular UI by hand was slow and repetitive across Zebra's B2B products.",
-      t: "Build an internal tool that speeds up front-end delivery without lowering code quality.",
-      a: "Built an LLM-powered pipeline that converts Figma designs into production React and Angular (TypeScript) interfaces and recommends refactors.",
-      r: "Cut UI build time by **35%**, as part of internal LLM tooling that saves developers **6 hours every week**.",
+      s: "Front-end teams at Zebra were hand-translating Figma designs into React and Angular UI across B2B products — slow, repetitive, and easy to drift from the design.",
+      t: "Give those teams an internal tool that turns a Figma design into production TypeScript UI, with a human still reviewing the output.",
+      a: "Built an LLM pipeline that reads a Figma design, generates React and Angular (TypeScript) interfaces, and recommends refactors so the code stays close to existing product patterns.",
+      r: "Measured a **35%** cut in UI build time. The tool is part of an internal LLM suite that saves developers **6 hours every week**.",
     },
     tech: ["React", "Angular", "TypeScript", "LLMs", "Figma"],
   },
@@ -126,7 +126,7 @@ export const projects: Project[] = [
       s: "Developers lost time switching between JIRA tickets and the codebase to track down defects.",
       t: "Shorten the path from bug report to fix, right inside the editor.",
       a: "Built a VS Code extension where LangChain-based LLM agents read JIRA tickets, localize the faulty code, and propose fixes in place.",
-      r: "Streamlined issue resolution and helped auto-diagnose defects directly in the editor.",
+      r: "Shipped an in-editor flow: a LangChain agent reads the JIRA ticket, points at the likely code, and proposes a fix without leaving VS Code.",
     },
     tech: ["TypeScript", "VS Code Extension API", "LLMs", "LangChain"],
   },
@@ -150,7 +150,7 @@ export const projects: Project[] = [
       s: "2D floor plans are hard for most people to picture as real, livable spaces.",
       t: "Let users explore and restyle their floor plan in 3D, in the browser.",
       a: "Built an interactive web app that converts a 2D floor plan into a mutable 3D model and applies architectural styles on demand.",
-      r: "Users can visualize and restyle a space interactively from a single 2D plan.",
+      r: "From one 2D plan, the browser builds a 3D model you can edit and restyle with architectural styles on demand.",
     },
     tech: ["JavaScript", "3D Rendering", "Web UI"],
     github: "https://github.com/Akash101201/RoomGPT",
@@ -162,7 +162,7 @@ export const projects: Project[] = [
       s: "Wanted to understand how distributed streaming platforms like Kafka work under the hood.",
       t: "Re-implement Kafka's core publish/subscribe streaming from scratch.",
       a: "Implemented the publish/subscribe core in Python using raw socket programming.",
-      r: "Supports **multiple concurrent producers and consumers**.",
+      r: "A from-scratch Python pub/sub core over raw sockets, running **multiple concurrent producers and consumers**.",
     },
     tech: ["Python", "Socket Programming", "Distributed Systems"],
   },
@@ -183,11 +183,11 @@ export const experience: Job[] = [
     period: "Jul 2024 - Present",
     current: true,
     bullets: [
-      "Built responsive mobile and desktop web UIs in React and Angular (TypeScript) across **4+ B2B products**, cutting average page-load time by **30%** (96 Lighthouse).",
+      "Built responsive mobile and desktop web UIs in React and Angular (TypeScript) across **4+ B2B products**.",
       "Developed Node.js services and REST and GraphQL APIs backed by MongoDB and SQL data stores, delivering full-stack features end to end.",
-      "Built **25+ reusable UI components** and raised Jest test coverage to **80%**, reducing production regressions by **40%**.",
+      "Grew a shared UI library and Jest coverage, cutting production regressions by **40%**.",
       "Scaled backend throughput with asynchronous, queue-based microservices and automated builds via Git-based CI/CD and Docker on Google Cloud Platform.",
-      "Built internal LLM-powered tools that generate UI from Figma designs and auto-diagnose defects, saving developers **6 hours each week**.",
+      "Built internal LLM tools that generate UI from Figma designs and auto-diagnose defects from JIRA tickets.",
       "Collaborated with product, design, and engineering in Agile/Scrum, averaging **20 pull requests a month**.",
     ],
   },
@@ -196,11 +196,11 @@ export const experience: Job[] = [
     company: "Zebra Technologies",
     period: "Jan 2024 - Jun 2024",
     bullets: [
-      "Built full-stack LLM-powered web apps and chatbots with React and Node.js that automated **60%** of routine customer queries.",
+      "Built full-stack LLM-powered web apps and chatbots with React and Node.js for routine customer support.",
       "Integrated REST APIs and data layers to retrieve, process, and present data, cutting manual data-retrieval effort by **45%**.",
       "Delivered analytics over Google BigQuery (**10M+ rows**) with Python, surfacing results through user-facing interfaces.",
-      "Built tooling that auto-generated unit tests and refactoring suggestions, speeding up development by **30%**.",
-      "Promoted to full-time Software Engineer within **6 months**.",
+      "Built tooling that auto-generated unit tests and refactoring suggestions for the team.",
+      "Promoted to full-time Software Engineer.",
     ],
   },
 ];
@@ -215,10 +215,9 @@ export const education = [
 ];
 
 export const certifications = [
-  "Java Programming (NPTEL)",
-  "Blockchain A-Z (Udemy)",
-  "SwiftUI Masterclass: iOS Development (Udemy)",
   "Flutter and Dart for App Development (Udemy)",
+  "SwiftUI Masterclass: iOS Development (Udemy)",
+  "Java Programming (NPTEL)",
 ];
 
 export const skillGroups = [
@@ -230,7 +229,7 @@ export const skillGroups = [
   {
     icon: "monitor",
     title: "Front-End",
-    skills: ["React", "Angular", "Responsive Design", "Web Performance", "Cross-Browser", "jQuery", "Figma"],
+    skills: ["React", "Angular", "Responsive Design", "Web Performance", "Cross-Browser", "Figma"],
   },
   {
     icon: "server",

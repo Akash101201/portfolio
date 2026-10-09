@@ -3,7 +3,60 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  --color-mist: #e8f0ed;
+  --color-foam: #f5faf8;
+  --color-ink: #1a2f2a;
+  --color-ink-soft: #3d554e;
+  --color-moss: #2a6b58;
+  --color-sea: #4a9b86;
+  --color-tide: #7eb8a8;
+  --color-bloom: #c9845c;
+  --color-petal: #d4a090;
+  --color-stone: #8a9e96;
+  --color-deep: #0d1a17;
+  --color-pool: #132420;
+}
+
+:root {
+  --surface: var(--color-foam);
+  --surface-alt: var(--color-mist);
+  --text: var(--color-ink);
+  --text-muted: var(--color-ink-soft);
+  --accent: var(--color-moss);
+  --accent-warm: var(--color-bloom);
+  --ring: var(--color-sea);
+  --wash-a: color-mix(in oklab, var(--color-tide) 45%, transparent);
+  --wash-b: color-mix(in oklab, var(--color-bloom) 28%, transparent);
+  --wash-c: color-mix(in oklab, var(--color-petal) 32%, transparent);
+  --wash-d: color-mix(in oklab, var(--color-sea) 35%, transparent);
+  --border-soft: color-mix(in oklab, var(--color-tide) 35%, transparent);
+  --ease-liquid: cubic-bezier(0.22, 1, 0.36, 1);
+  --radius-organic: 42% 58% 48% 52% / 52% 42% 58% 48%;
+  --radius-pebble: 1.75rem 2.5rem 1.5rem 2.25rem;
+  --radius-petal: 2rem 1.25rem 2.5rem 1.5rem;
+  --scroll-progress: 0;
+  --tide-x: 0px;
+  --tide-y: 0px;
+  --pointer-x: 50vw;
+  --pointer-y: 40vh;
+}
+
+.dark {
+  --surface: var(--color-deep);
+  --surface-alt: var(--color-pool);
+  --text: #e8f0ed;
+  --text-muted: #a8c0b6;
+  --accent: #6fada0;
+  --accent-warm: #e0a87a;
+  --ring: #7eb8a8;
+  --wash-a: color-mix(in oklab, #2a6b58 40%, transparent);
+  --wash-b: color-mix(in oklab, #c9845c 22%, transparent);
+  --wash-c: color-mix(in oklab, #d4a090 18%, transparent);
+  --wash-d: color-mix(in oklab, #4a9b86 30%, transparent);
+  --border-soft: color-mix(in oklab, #4a9b86 28%, transparent);
 }
 
 html {
@@ -17,32 +70,266 @@ html {
   }
 }
 
+body {
+  background: var(--surface);
+  color: var(--text);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 10% -10%, var(--wash-a), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 90% 5%, var(--wash-b), transparent 50%),
+    radial-gradient(ellipse 50% 35% at 50% 100%, var(--wash-d), transparent 60%);
+  background-attachment: fixed;
+}
+
 section[id] {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 5.5rem;
 }
 
 ::selection {
-  background-color: var(--color-indigo-500);
+  background-color: color-mix(in oklab, var(--color-sea) 55%, white);
+  color: var(--color-ink);
+}
+
+.dark ::selection {
+  background-color: color-mix(in oklab, var(--color-sea) 45%, transparent);
   color: white;
 }
 
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ——— Liquid reveal ——— */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(22px) scale(0.985);
+  filter: blur(2px);
   transition:
-    opacity 0.6s ease-out,
-    transform 0.6s ease-out;
+    opacity 0.9s var(--ease-liquid),
+    transform 0.9s var(--ease-liquid),
+    filter 0.9s var(--ease-liquid);
 }
 
 .reveal.is-visible {
   opacity: 1;
   transform: none;
+  filter: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
     transform: none;
+    filter: none;
     transition: none;
   }
+}
+
+/* ——— Living atmosphere ——— */
+@keyframes blob-drift {
+  0%,
+  100% {
+    border-radius: 42% 58% 48% 52% / 52% 42% 58% 48%;
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    border-radius: 58% 42% 55% 45% / 45% 55% 42% 58%;
+    transform: translate(2%, -3%) scale(1.04);
+  }
+  66% {
+    border-radius: 48% 52% 42% 58% / 58% 48% 52% 42%;
+    transform: translate(-2%, 2%) scale(0.97);
+  }
+}
+
+@keyframes tide-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer-wash {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.organic-blob {
+  border-radius: var(--radius-organic);
+  animation: blob-drift 18s var(--ease-liquid) infinite;
+}
+
+.organic-blob-slow {
+  border-radius: 55% 45% 60% 40% / 45% 55% 40% 60%;
+  animation: blob-drift 26s var(--ease-liquid) infinite reverse;
+}
+
+.tide-pulse {
+  animation: tide-pulse 6s var(--ease-liquid) infinite;
+}
+
+.float-soft {
+  animation: float-soft 7s var(--ease-liquid) infinite;
+}
+
+.liquid-gradient {
+  background-size: 200% 200%;
+  animation: shimmer-wash 12s var(--ease-liquid) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .organic-blob,
+  .organic-blob-slow,
+  .tide-pulse,
+  .float-soft,
+  .liquid-gradient {
+    animation: none;
+  }
+}
+
+/* Shared organic surfaces */
+.surface-petal {
+  border-radius: var(--radius-petal);
+  background: color-mix(in oklab, var(--surface) 82%, var(--color-tide));
+  border: 1px solid var(--border-soft);
+}
+
+.surface-pebble {
+  border-radius: var(--radius-pebble);
+  background: color-mix(in oklab, var(--surface) 88%, white);
+  border: 1px solid var(--border-soft);
+}
+
+.dark .surface-pebble {
+  background: color-mix(in oklab, var(--surface-alt) 90%, var(--color-moss));
+}
+
+.btn-organic {
+  border-radius: 1.25rem 1.75rem 1.25rem 1.85rem;
+  transition:
+    transform 0.45s var(--ease-liquid),
+    background-color 0.45s var(--ease-liquid),
+    box-shadow 0.45s var(--ease-liquid),
+    color 0.45s var(--ease-liquid);
+}
+
+.btn-organic:hover:not(.magnetic) {
+  transform: translateY(-2px) scale(1.015);
+}
+
+.magnetic {
+  will-change: transform;
+  transition:
+    transform 0.35s var(--ease-liquid),
+    background-color 0.45s var(--ease-liquid),
+    box-shadow 0.45s var(--ease-liquid),
+    color 0.45s var(--ease-liquid);
+}
+
+.tide-layer {
+  transform: translate3d(var(--tide-x), var(--tide-y), 0);
+  will-change: transform;
+}
+
+.glass {
+  background: color-mix(in oklab, var(--surface) 62%, transparent);
+  backdrop-filter: blur(14px) saturate(1.15);
+  -webkit-backdrop-filter: blur(14px) saturate(1.15);
+}
+
+.film-grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.dark .film-grain {
+  opacity: 0.07;
+  mix-blend-mode: soft-light;
+}
+
+.cursor-wash {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: min(42vw, 28rem);
+  height: min(42vw, 28rem);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--color-tide) 28%, transparent),
+    color-mix(in oklab, var(--color-bloom) 12%, transparent) 45%,
+    transparent 70%
+  );
+  opacity: 0.7;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tide-layer {
+    transform: none;
+    transition: none;
+  }
+
+  .film-grain,
+  .cursor-wash {
+    display: none;
+  }
+}
+
+.chip-organic {
+  border-radius: 1rem 1.4rem 1rem 1.5rem;
+}
+
+.focus-organic:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+.section-flow {
+  position: relative;
+}
+
+.section-flow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: min(72vw, 48rem);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--color-tide) 55%, transparent),
+    color-mix(in oklab, var(--color-bloom) 40%, transparent),
+    transparent
+  );
+  opacity: 0.7;
+  pointer-events: none;
 }

@@ -16,8 +16,8 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
-          background: "linear-gradient(135deg, #09090b 0%, #1e1b4b 100%)",
-          color: "white",
+          background: "linear-gradient(145deg, #e8f0ed 0%, #f5faf8 40%, #d4ebe4 100%)",
+          color: "#1a2f2a",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
@@ -25,29 +25,30 @@ export default function OpengraphImage() {
             style={{
               width: 72,
               height: 72,
-              borderRadius: 18,
+              borderRadius: "45% 55% 50% 50%",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              background: "linear-gradient(135deg, #6366f1, #7c3aed)",
-              fontSize: 32,
-              fontWeight: 700,
+              background: "linear-gradient(145deg, #4a9b86, #2a6b58)",
+              color: "white",
+              fontSize: 28,
+              fontWeight: 600,
             }}
           >
             {profile.initials}
           </div>
-          <div style={{ fontSize: 26, color: "#a5b4fc" }}>{profile.location}</div>
+          <div style={{ fontSize: 24, color: "#3d554e" }}>{profile.location}</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 76, fontWeight: 800, letterSpacing: -2 }}>{profile.name}</div>
-          <div style={{ fontSize: 40, color: "#c7d2fe", marginTop: 8 }}>{profile.heroTitle}</div>
-          <div style={{ fontSize: 28, color: "#a1a1aa", marginTop: 20, maxWidth: 1000 }}>
+          <div style={{ fontSize: 72, fontWeight: 500, letterSpacing: -2 }}>{profile.name}</div>
+          <div style={{ fontSize: 36, color: "#2a6b58", marginTop: 10 }}>{profile.heroTitle}</div>
+          <div style={{ fontSize: 26, color: "#3d554e", marginTop: 18, maxWidth: 980 }}>
             React · Angular · Node.js · GraphQL · LangChain · RAG
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: 24 }}>
+        <div style={{ display: "flex", gap: 20 }}>
           {metrics.slice(0, 3).map((m) => (
             <div
               key={m.label}
@@ -55,13 +56,13 @@ export default function OpengraphImage() {
                 display: "flex",
                 flexDirection: "column",
                 padding: "16px 24px",
-                borderRadius: 16,
-                border: "1px solid rgba(165,180,252,0.3)",
-                background: "rgba(99,102,241,0.12)",
+                borderRadius: "28px 36px 24px 32px",
+                border: "1px solid rgba(126,184,168,0.45)",
+                background: "rgba(255,255,255,0.55)",
               }}
             >
-              <div style={{ fontSize: 36, fontWeight: 700 }}>{m.value}</div>
-              <div style={{ fontSize: 20, color: "#a1a1aa" }}>{m.label}</div>
+              <div style={{ fontSize: 34, fontWeight: 600, color: "#2a6b58" }}>{m.value}</div>
+              <div style={{ fontSize: 18, color: "#3d554e" }}>{m.label}</div>
             </div>
           ))}
         </div>
