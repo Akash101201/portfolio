@@ -1,5 +1,6 @@
 import { Lock } from "lucide-react";
 import type { Project } from "@/data/resume";
+import { FigmaCodeShowcase } from "./FigmaCodeShowcase";
 import { Reveal } from "./Reveal";
 import { RichText } from "./RichText";
 
@@ -59,6 +60,8 @@ export function FeaturedCaseStudy({ project }: { project: Project }) {
               </li>
             ))}
           </ol>
+
+          <FigmaCodeShowcase />
 
           <div className="mt-10 flex flex-wrap items-center gap-3 border-t border-[var(--border-soft)] pt-6">
             <ul className="flex flex-wrap gap-2" aria-label="Tech stack">

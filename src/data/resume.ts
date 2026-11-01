@@ -96,8 +96,11 @@ export const ai = {
   stack: ["LLMs", "LangChain", "LlamaIndex", "RAG", "Agentic workflows", "Prompt Engineering"],
 };
 
+export type ProjectCategory = "all" | "ai" | "fullstack" | "systems";
+
 export type Project = {
   title: string;
+  category: "ai" | "fullstack" | "systems";
   featured?: boolean;
   badge: "internal" | "open-source" | "on-request";
   star: { s: string; t: string; a: string; r: string };
@@ -106,9 +109,17 @@ export type Project = {
   demo?: string;
 };
 
+export const projectCategories = [
+  { id: "all" as const, label: "All Projects" },
+  { id: "ai" as const, label: "AI & LLM Tools" },
+  { id: "fullstack" as const, label: "Full-Stack Web" },
+  { id: "systems" as const, label: "Distributed Systems" },
+];
+
 export const projects: Project[] = [
   {
     title: "Figma-to-Code Generation Tool",
+    category: "ai",
     featured: true,
     badge: "internal",
     star: {
@@ -121,6 +132,7 @@ export const projects: Project[] = [
   },
   {
     title: "Agentic VS Code Defect-Resolution Extension",
+    category: "ai",
     badge: "internal",
     star: {
       s: "Developers lost time switching between JIRA tickets and the codebase to track down defects.",
@@ -132,6 +144,7 @@ export const projects: Project[] = [
   },
   {
     title: "Microservice Communication with RabbitMQ",
+    category: "systems",
     badge: "open-source",
     star: {
       s: "Services in a distributed system needed to communicate reliably without being tightly coupled.",
@@ -145,6 +158,7 @@ export const projects: Project[] = [
   },
   {
     title: "3D Environment Generation from 2D Floor Plans",
+    category: "fullstack",
     badge: "open-source",
     star: {
       s: "2D floor plans are hard for most people to picture as real, livable spaces.",
@@ -157,6 +171,7 @@ export const projects: Project[] = [
   },
   {
     title: "Yet Another Kafka",
+    category: "systems",
     badge: "on-request",
     star: {
       s: "Wanted to understand how distributed streaming platforms like Kafka work under the hood.",

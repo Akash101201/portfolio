@@ -1,6 +1,6 @@
 "use client";
 
-import { Download, Menu, X } from "lucide-react";
+import { FileText, Menu, Search, X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { navLinks, profile } from "@/data/resume";
@@ -30,6 +30,7 @@ function BrandMark() {
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("");
 
   useEffect(() => {
     if (!open) return;
@@ -37,6 +38,34 @@ export function Navbar() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
+
+  useEffect(() => {
+    const sectionIds = ["top", ...navLinks.map((l) => l.href.replace("#", ""))];
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (elements.length === 0 || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) {
+          setActiveSection(visible.target.id === "top" ? "" : visible.target.id);
+        }
+      },
+      { rootMargin: "-20% 0px -60% 0px", threshold: [0.1, 0.3, 0.6] },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const triggerPalette = () => {
+    window.dispatchEvent(new CustomEvent("open-command-palette"));
+  };
 
   return (
     <header className="glass sticky top-0 z-50 border-b border-[var(--border-soft)]">
@@ -50,29 +79,60 @@ export function Navbar() {
           <span>{profile.name}</span>
         </a>
 
-        <div className="hidden items-center gap-0.5 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="focus-organic px-3 py-2 text-sm font-medium text-[var(--text-muted)] transition-colors duration-300 hover:text-[var(--accent)]"
-              style={{ borderRadius: "0.85rem 1.1rem" }}
-            >
-              {link.label}
-            </a>
-          ))}
+        <div className="hidden items-center gap-1 md:flex">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.replace("#", "");
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                className={`focus-organic px-3 py-1.5 text-sm font-medium transition-all duration-200 ${
+                  isActive
+                    ? "bg-[color-mix(in_oklab,var(--color-tide)_20%,var(--surface))] text-[var(--accent)] font-semibold"
+                    : "text-[var(--text-muted)] hover:text-[var(--accent)]"
+                }`}
+                style={{ borderRadius: "0.85rem 1.1rem" }}
+              >
+                {link.label}
+              </a>
+            );
+          })}
+
+          {/* Quick Command Palette Button */}
+          <button
+            type="button"
+            onClick={triggerPalette}
+            className="focus-organic ml-1 inline-flex items-center gap-2 rounded-xl border border-[var(--border-soft)] bg-[color-mix(in_oklab,var(--surface)_80%,transparent)] px-2.5 py-1.5 text-xs text-[var(--text-muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--text)]"
+            title="Open Command Palette (Cmd + K)"
+          >
+            <Search className="size-3.5 text-[var(--accent)]" />
+            <span className="font-mono text-[10px] bg-[var(--surface)] px-1.5 py-0.5 rounded border border-[var(--border-soft)]">
+              ⌘K
+            </span>
+          </button>
+
           <ThemeToggle />
+
           <a
             href={profile.resume}
-            download
-            className="btn-organic focus-organic ml-2 inline-flex items-center gap-2 bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-organic focus-organic ml-2 inline-flex items-center gap-2 bg-[var(--accent)] px-3.5 py-1.5 text-sm font-medium text-white shadow-sm"
           >
-            <Download className="size-4" aria-hidden="true" />
+            <FileText className="size-4" aria-hidden="true" />
             Resume
           </a>
         </div>
 
-        <div className="flex items-center md:hidden">
+        <div className="flex items-center gap-1 md:hidden">
+          <button
+            type="button"
+            onClick={triggerPalette}
+            className="focus-organic inline-flex size-10 items-center justify-center text-[var(--text-muted)]"
+            aria-label="Open command search"
+          >
+            <Search className="size-4 text-[var(--accent)]" />
+          </button>
           <ThemeToggle />
           <button
             type="button"
@@ -106,15 +166,29 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <a
-            href={profile.resume}
-            download
-            onClick={() => setOpen(false)}
-            className="btn-organic mt-3 flex items-center justify-center gap-2 bg-[var(--accent)] px-4 py-3 text-sm font-medium text-white"
-          >
-            <Download className="size-4" aria-hidden="true" />
-            Download Resume
-          </a>
+          <div className="mt-3 flex flex-col gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                triggerPalette();
+              }}
+              className="btn-organic flex items-center justify-center gap-2 border border-[var(--border-soft)] bg-[color-mix(in_oklab,var(--surface)_85%,transparent)] px-4 py-2.5 text-sm font-medium text-[var(--text)]"
+            >
+              <Search className="size-4 text-[var(--accent)]" />
+              Quick Command Palette (⌘K)
+            </button>
+            <a
+              href={profile.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="btn-organic flex items-center justify-center gap-2 bg-[var(--accent)] px-4 py-3 text-sm font-medium text-white"
+            >
+              <FileText className="size-4" aria-hidden="true" />
+              View Resume (PDF)
+            </a>
+          </div>
         </div>
       )}
     </header>

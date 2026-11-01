@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Figtree, Fraunces } from "next/font/google";
+import { CommandPalette } from "@/components/CommandPalette";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { OrganicAtmosphere } from "@/components/OrganicAtmosphere";
@@ -87,6 +88,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             Skip to content
           </a>
           <OrganicAtmosphere />
+          <CommandPalette />
           <Navbar />
           <main id="main" className="flex-1">
             {children}

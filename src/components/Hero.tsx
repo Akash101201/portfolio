@@ -1,4 +1,4 @@
-import { ArrowRight, Download, MapPin } from "lucide-react";
+import { ArrowRight, FileText, MapPin } from "lucide-react";
 import Image from "next/image";
 import { profile } from "@/data/resume";
 import { CapabilityCycle } from "./CapabilityCycle";
@@ -92,11 +92,12 @@ export function Hero() {
             </MagneticLink>
             <MagneticLink
               href={profile.resume}
-              download
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-organic focus-organic glass inline-flex min-h-12 items-center justify-center gap-2 border border-[var(--border-soft)] px-7 py-3 text-base font-semibold text-[var(--text)]"
             >
-              <Download className="size-4" aria-hidden="true" />
-              Download resume
+              <FileText className="size-4" aria-hidden="true" />
+              View resume
             </MagneticLink>
           </div>
 

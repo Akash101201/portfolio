@@ -17,19 +17,26 @@ function useMagnetic<T extends HTMLElement>(strength = 0.35) {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    let rect: DOMRect | null = null;
+    const onEnter = () => {
+      rect = el.getBoundingClientRect();
+    };
     const onMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
+      if (!rect) rect = el.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
       el.style.transform = `translate3d(${x * strength}px, ${y * strength}px, 0)`;
     };
     const onLeave = () => {
+      rect = null;
       el.style.transform = "translate3d(0, 0, 0)";
     };
 
-    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseenter", onEnter, { passive: true });
+    el.addEventListener("mousemove", onMove, { passive: true });
     el.addEventListener("mouseleave", onLeave);
     return () => {
+      el.removeEventListener("mouseenter", onEnter);
       el.removeEventListener("mousemove", onMove);
       el.removeEventListener("mouseleave", onLeave);
     };

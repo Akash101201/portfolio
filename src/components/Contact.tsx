@@ -1,5 +1,6 @@
-import { Download, Mail, MapPin } from "lucide-react";
+import { Download, FileText, Mail, MapPin } from "lucide-react";
 import { profile } from "@/data/resume";
+import { ContactForm } from "./ContactForm";
 import { CopyEmail } from "./CopyEmail";
 import { FluidBackdrop } from "./FluidBackdrop";
 import { GitHubIcon, LinkedInIcon } from "./icons";
@@ -58,11 +59,22 @@ export function Contact() {
                 <GitHubIcon className="size-4" />
                 GitHub
               </MagneticLink>
+              <MagneticLink
+                href={profile.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={socialClass}
+              >
+                <FileText className="size-4" aria-hidden="true" />
+                View Resume
+              </MagneticLink>
               <MagneticLink href={profile.resume} download className={socialClass}>
                 <Download className="size-4" aria-hidden="true" />
-                Resume
+                Download PDF
               </MagneticLink>
             </div>
+
+            <ContactForm />
 
             <p className="mt-10 inline-flex items-center gap-1.5 text-sm text-[var(--text-muted)]">
               <MapPin className="size-4 text-[var(--accent)]" aria-hidden="true" />
